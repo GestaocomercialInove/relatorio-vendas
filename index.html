@@ -125,6 +125,63 @@
             font-size: 0.9em;
         }
         
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            text-align: center;
+            min-width: 300px;
+        }
+        
+        .login-box h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .login-box p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .login-box input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        
+        .login-box button {
+            width: 100%;
+            padding: 10px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .login-box button:hover {
+            background: #764ba2;
+        }
+        
         .mes-selector {
             margin-bottom: 20px;
             text-align: center;
@@ -146,7 +203,17 @@
             <p>Análise Detalhada de Desempenho</p>
         </div>
         
-        <div class="content">
+        <div class="login-overlay" id="loginOverlay">
+            <div class="login-box">
+                <h2>🔐 Acesso Restrito</h2>
+                <p>Digite a senha para acessar o relatório</p>
+                <input type="password" id="passwordInput" placeholder="Senha" onkeypress="if(event.key==='Enter') verificarSenha()">
+                <button onclick="verificarSenha()">Acessar</button>
+                <p id="errorMsg" style="color: red; margin-top: 10px;"></p>
+            </div>
+        </div>
+        
+        <div class="content" id="content" style="display: none;">
             <div class="mes-selector">
                 <label for="mes-select">Selecionar Mês:</label>
                 <select id="mes-select" onchange="mudarMes()">
@@ -157,8 +224,8 @@
             </div>
             
             <div class="info-box">
-                <strong>📅 Período Analisado:</strong> 01-16/03 (11 dias úteis de 22 dias úteis do mês)<br>
-                <strong>⏰ Última Atualização:</strong> 16/03/2026 às 12:50:19
+                <strong>📅 Período Analisado:</strong> 01-17/03 (12 dias úteis de 22 dias úteis do mês)<br>
+                <strong>⏰ Última Atualização:</strong> 17/03/2026 às 11:23:48
             </div>
             
             <h2>📈 Resumo Geral</h2>
@@ -169,7 +236,7 @@
                 </tr>
                 <tr>
                     <td><strong>Meta Total do Mês</strong></td>
-                    <td class="numero">R$ 1,857,000.00</td>
+                    <td class="numero">R$ 1,407,000.00</td>
                 </tr>
                 <tr>
                     <td><strong>Total Realizado (até agora)</strong></td>
@@ -177,19 +244,19 @@
                 </tr>
                 <tr>
                     <td><strong>% da Meta Atingida</strong></td>
-                    <td class="numero negativo">29.0%</td>
+                    <td class="numero negativo">38.3%</td>
                 </tr>
                 <tr>
                     <td><strong>Venda Diária Média Realizada</strong></td>
-                    <td class="numero">R$ 48,968.79</td>
+                    <td class="numero">R$ 44,888.05</td>
                 </tr>
                 <tr>
                     <td><strong>Venda Diária Necessária (para bater meta)</strong></td>
-                    <td class="numero">R$ 119,849.40</td>
+                    <td class="numero">R$ 86,834.33</td>
                 </tr>
                 <tr>
                     <td><strong>Projeção para o Mês (22 dias úteis)</strong></td>
-                    <td class="numero">R$ 1,077,313.30</td>
+                    <td class="numero">R$ 987,537.19</td>
                 </tr>
             </table>
             
@@ -206,11 +273,11 @@
                 </tr>
                 <tr>
                     <td><strong>ANDERSON</strong></td>
-                    <td class="numero">R$ 450,000.00</td>
+                    <td class="numero">R$ 0.00</td>
                     <td class="numero">R$ 143,856.37</td>
-                    <td class="numero negativo">32.0%</td>
-                    <td class="numero">R$ 27,831.24</td>
-                    <td class="numero">R$ 287,712.74</td>
+                    <td class="numero negativo">0.0%</td>
+                    <td class="numero">R$ -14,385.64</td>
+                    <td class="numero">R$ 263,736.68</td>
                     <td class="numero">31.52%</td>
                 </tr>
                 <tr>
@@ -218,17 +285,17 @@
                     <td class="numero">R$ 243,000.00</td>
                     <td class="numero">R$ 101,183.72</td>
                     <td class="numero negativo">41.6%</td>
-                    <td class="numero">R$ 12,892.39</td>
-                    <td class="numero">R$ 202,367.44</td>
+                    <td class="numero">R$ 14,181.63</td>
+                    <td class="numero">R$ 185,503.49</td>
                     <td class="numero">28.75%</td>
                 </tr>
                 <tr>
                     <td><strong>EDUARDA DUARTE</strong></td>
-                    <td class="numero">R$ 0.00</td>
+                    <td class="numero">R$ 260,000.00</td>
                     <td class="numero">R$ 103,722.41</td>
-                    <td class="numero negativo">0.0%</td>
-                    <td class="numero">R$ -9,429.31</td>
-                    <td class="numero">R$ 207,444.82</td>
+                    <td class="numero negativo">39.9%</td>
+                    <td class="numero">R$ 15,627.76</td>
+                    <td class="numero">R$ 190,157.75</td>
                     <td class="numero">23.25%</td>
                 </tr>
                 <tr>
@@ -236,35 +303,26 @@
                     <td class="numero">R$ 152,000.00</td>
                     <td class="numero">R$ 41,831.09</td>
                     <td class="numero negativo">27.5%</td>
-                    <td class="numero">R$ 10,015.36</td>
-                    <td class="numero">R$ 83,662.18</td>
+                    <td class="numero">R$ 11,016.89</td>
+                    <td class="numero">R$ 76,690.33</td>
                     <td class="numero">27.02%</td>
                 </tr>
                 <tr>
                     <td><strong>PAULA</strong></td>
                     <td class="numero">R$ 200,000.00</td>
-                    <td class="numero">R$ 836.23</td>
-                    <td class="numero negativo">0.4%</td>
-                    <td class="numero">R$ 18,105.80</td>
-                    <td class="numero">R$ 1,672.46</td>
-                    <td class="numero">15.26%</td>
-                </tr>
-                <tr>
-                    <td><strong>PAULA IZABELA</strong></td>
-                    <td class="numero">R$ 0.00</td>
-                    <td class="numero">R$ 95,296.99</td>
-                    <td class="numero negativo">0.0%</td>
-                    <td class="numero">R$ -8,663.36</td>
-                    <td class="numero">R$ 190,593.98</td>
-                    <td class="numero">26.58%</td>
+                    <td class="numero">R$ 96,133.22</td>
+                    <td class="numero negativo">48.1%</td>
+                    <td class="numero">R$ 10,386.68</td>
+                    <td class="numero">R$ 176,244.24</td>
+                    <td class="numero">26.48%</td>
                 </tr>
                 <tr>
                     <td><strong>VITOR RYAN</strong></td>
                     <td class="numero">R$ 92,000.00</td>
                     <td class="numero">R$ 51,929.84</td>
                     <td class="numero negativo">56.4%</td>
-                    <td class="numero">R$ 3,642.74</td>
-                    <td class="numero">R$ 103,859.68</td>
+                    <td class="numero">R$ 4,007.02</td>
+                    <td class="numero">R$ 95,204.71</td>
                     <td class="numero">18.68%</td>
                 </tr>
             </table>
@@ -308,17 +366,10 @@
                 </tr>
                 <tr>
                     <td><strong>PAULA</strong></td>
-                    <td class="numero">R$ 836.23</td>
-                    <td class="numero">R$ 708.61</td>
-                    <td class="numero">R$ 127.62</td>
-                    <td class="numero negativo">15.26%</td>
-                </tr>
-                <tr>
-                    <td><strong>PAULA IZABELA</strong></td>
-                    <td class="numero">R$ 95,296.99</td>
-                    <td class="numero">R$ 69,965.08</td>
-                    <td class="numero">R$ 25,331.91</td>
-                    <td class="numero positivo">26.58%</td>
+                    <td class="numero">R$ 96,133.22</td>
+                    <td class="numero">R$ 70,673.69</td>
+                    <td class="numero">R$ 25,459.53</td>
+                    <td class="numero positivo">26.48%</td>
                 </tr>
                 <tr>
                     <td><strong>VITOR RYAN</strong></td>
@@ -336,9 +387,35 @@
     </div>
     
     <script>
-        function mudarMes() {
+        // Verifica se usuário já fez login
+        window.onload = function() {{
+            const senhaCorreta = 'vendas2026';
+            const loginFeito = localStorage.getItem('relatorio-login');
+            
+            if (loginFeito === 'true') {{
+                document.getElementById('loginOverlay').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+            }}
+        }};
+        
+        function verificarSenha() {{
+            const senha = document.getElementById('passwordInput').value;
+            const senhaCorreta = 'vendas2026';
+            
+            if (senha === senhaCorreta) {{
+                localStorage.setItem('relatorio-login', 'true');
+                document.getElementById('loginOverlay').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+                document.getElementById('errorMsg').textContent = '';
+            }} else {{
+                document.getElementById('errorMsg').textContent = 'Senha incorreta!';
+                document.getElementById('passwordInput').value = '';
+            }}
+        }}
+        
+        function mudarMes() {{
             alert('Funcionalidade de seleção de mês em desenvolvimento');
-        }
+        }}
     </script>
 </body>
 </html>
